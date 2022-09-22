@@ -1,0 +1,164 @@
+<mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+        <div>
+            <a href="pages/sach">Them Moi Ne </a>
+        </div>
+        <mat-panel-title>
+            {{formGroup.getRawValue().id ? 'Update':'Add'}} Sach
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row form-group">
+        <div class="col-12">
+            <form class="row" [formGroup]="formGroup" (ngSubmit)="doSubmit()">
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="ten" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('ten')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Ma</mat-label>
+                        <input matInput formControlName="ma" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('ma')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Nam XUat Ban</mat-label>
+                        <input matInput formControlName="nxb" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('nxb')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>ID Nha Xuat ban</mat-label>
+                        <mat-select formControlName="idNxb">
+                            <mat-option *ngFor="let item of itemNXB" [value]="item.id">
+                                {{item.id}} - {{item.ten}}
+                            </mat-option>
+                        </mat-select>
+                        <app-inline-message [formName]="formGroup.get('nhaxuatban.id')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>ID Tac Gia</mat-label>
+                        <mat-select formControlName="idTg">
+                            <mat-option *ngFor="let item of itemsTG" [value]="item.id">
+                                {{item.id}} - {{item.ten}}
+                            </mat-option>
+                        </mat-select>
+                        <app-inline-message [formName]="formGroup.get('tacGia.id')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Chu De</mat-label>
+                        <input matInput formControlName="chuDe" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('chuDe')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Mo Ta</mat-label>
+                        <input matInput formControlName="moTa" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('moTa')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>So Luong Con lai</mat-label>
+                        <input matInput formControlName="slcl" type="number" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('slcl')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>So Luong Dang muon</mat-label>
+                        <input matInput formControlName="sldm" type="number" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('sldm')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Tong Sach</mat-label>
+                        <input matInput formControlName="tongSach" type="number" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('tongSach')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+                <div class="">
+                    <button class="btn btn-success" (click)=" resetForm()">reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</mat-expansion-panel>
+<mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{'List of bandoc'}}
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="table-responsive">
+        <ngx-datatable [ngClass]="'material'" [columnMode]="'flex'" [columns]="columns" rowHeight="auto"
+            [count]="items.length" [offset]="page.pageNumber" [limit]="page.size" [headerHeight]="50"
+            [footerHeight]="50" [rows]="items" [externalPaging]="false"
+            [messages]="{emptyMessage: 'Không có dữ liệu', totalMessage: 'bản ghi'}">
+            <ng-container *ngFor="let col of columns">
+                <ngx-datatable-column prop="{{ col.prop }}" name="{{ col.name }}" [flexGrow]="col.flexGrow">
+                    <ng-template let-column="column" ngx-datatable-header-template>
+                        {{ column.name }}
+                    </ng-template>
+                    <ng-template let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template let-row="row">
+                        <ng-container [ngSwitch]="col.prop">
+                            <ng-container *ngSwitchCase="'index'">
+                                {{ rowIndex + 1 + page.pageNumber * page.size }}
+                            </ng-container>
+
+                            <ng-container *ngSwitchCase="'actions'" class="text-center">
+                                <button class="btn btn-sm btn-outline-primary mg-r-2" type="button" title="Sửa"
+                                    (click)="edit(row)">
+                                    <span class="fe fe-edit-2">Sua</span>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger mg-l-2" type="button" title="Xóa"
+                                    (click)="delete(row.id)">
+                                    <span class="fe fe-trash-2">Xoa</span>
+                                </button>
+                            </ng-container>
+                            <ng-container *ngFor="let item of itemsTG">
+                                <ng-container *ngSwitchCase="'idTg'">
+                                    {{ item.id == value ? item.ten : '' }}
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngFor="let item of itemNXB">
+                                <ng-container *ngSwitchCase="'idNxb'">
+                                    {{ item.id == value ? item.ten : '' }}
+                                </ng-container>
+                            </ng-container>
+
+                            <ng-container *ngSwitchDefault>
+                                <span title="{{ value }}">{{ value }}</span>
+                            </ng-container>
+                        </ng-container>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ng-container>
+        </ngx-datatable>
+    </div>
+</mat-expansion-panel>

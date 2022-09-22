@@ -1,0 +1,150 @@
+<mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+        <div>
+            <a href="pages/muonsach">Them Moi Ne </a>
+        </div>
+        <mat-panel-title>
+            {{formGroup.getRawValue().id ? 'Update' : 'Add'}} Muon sach
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row form-group">
+        <div class="col-12">
+            <form class="row" [formGroup]="formGroup" (ngSubmit)="doSubmit()">
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>ID Ban Doc</mat-label>
+                        <mat-select formControlName="idBanDoc">
+                            <mat-option *ngFor="let item of itemsBD" [value]="item.id">
+                                {{item.id}} - {{item.ten}}
+                            </mat-option>
+                        </mat-select>
+                        <app-inline-message [formName]="formGroup.get('idBanDoc')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>ID Sach</mat-label>
+                        <mat-select formControlName="idSach">
+                            <mat-option *ngFor="let item of itemsS" [value]="item.id">
+                                {{item.id}} - {{item.ten}}
+                            </mat-option>
+                        </mat-select>
+                        <app-inline-message [formName]="formGroup.get('idSach')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>So Luong</mat-label>
+                        <input matInput formControlName="soLuong" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('soLuong')" [message]="'Phone number'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Ngay Muon</mat-label>
+                        <input matInput type="date" formControlName="ngayMuon" rows="3"/>
+                        <app-inline-message [formName]="formGroup.get('ngayMuon')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Ngay Tra</mat-label>
+                        <input matInput type="date" formControlName="ngayTra" rows="3"/>
+                        <app-inline-message [formName]="formGroup.get('ngayTra')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <label>Trang Thai</label>
+                    <select class="form-control mt-2" formControlName="trangThai">
+                        <option [value]="0">Dang muon</option>
+                        <option [value]="1">Da Tra</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Ghi chu</mat-label>
+                        <input matInput formControlName="ghiChu" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('ghiChu')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary">Submit</button>
+                </div>
+                <div class="">
+                    <button class="btn btn-success" (click)=" resetForm()">reset</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</mat-expansion-panel>
+<mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            {{'List of muon sach'}}
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="table-responsive">
+        <ngx-datatable [ngClass]="'material'" [columnMode]="'flex'" [columns]="columns" rowHeight="auto"
+                       [count]="items.length" [offset]="page.pageNumber" [limit]="page.size" [headerHeight]="50"
+                       [footerHeight]="50" [rows]="items" [externalPaging]="false"
+                       [messages]="{emptyMessage: 'Không có dữ liệu', totalMessage: 'bản ghi'}">
+            <ng-container *ngFor="let col of columns">
+                <ngx-datatable-column prop="{{ col.prop }}" name="{{ col.name }}" [flexGrow]="col.flexGrow">
+                    <ng-template let-column="column" ngx-datatable-header-template>
+                        {{ column.name }}
+                    </ng-template>
+                    <ng-template let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template let-row="row">
+                        <ng-container [ngSwitch]="col.prop">
+                            <ng-container *ngSwitchCase="'index'">
+                                {{ rowIndex + 1 + page.pageNumber * page.size }}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'trangThai'">
+                                {{ value == 0 ? 'Dang Muon' : 'Da Tra'}}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'ngayMuon'">
+                                {{ value | date: 'dd/MM/yyyy HH:mm:ss' }}
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'ngayTra'">
+                                {{ value | date: 'dd/MM/yyyy HH:mm:ss' }}
+                            </ng-container>
+                            <ng-container *ngFor="let item of itemsS">
+                                <ng-container *ngSwitchCase="'idSach'">
+                                    {{ item.id == value ? item.ten : '' }}
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngFor="let item of itemsBD">
+                                <ng-container *ngSwitchCase="'idBanDoc'">
+                                    {{ item.id == value ? item.ten : '' }}
+                                </ng-container>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'actions'" class="text-center">
+                                <button class="btn btn-sm btn-outline-primary mg-r-2" type="button" title="Sửa"
+                                        (click)="edit(row)">
+                                    <span class="fe fe-edit-2">Sua</span>
+                                </button>
+
+                                <button class="btn btn-sm btn-outline-danger mg-l-2" type="button" title="Xóa"
+                                        (click)="delete(row.id)">
+                                    <span class="fe fe-trash-2">Xoa</span>
+                                </button>
+                            </ng-container>
+
+                            <ng-container *ngSwitchDefault>
+                                <span title="{{ value }}">{{ value }}</span>
+                            </ng-container>
+                        </ng-container>
+                    </ng-template>
+                </ngx-datatable-column>
+            </ng-container>
+        </ngx-datatable>
+    </div>
+</mat-expansion-panel>
