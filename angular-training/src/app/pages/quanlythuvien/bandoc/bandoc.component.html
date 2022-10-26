@@ -1,76 +1,92 @@
 <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
-        <div>
-            <a href="pages/bandoc">Them Moi Ne </a>
-        </div>
         <mat-panel-title>
-            {{formGroup.getRawValue().id ? 'Update':'Add'}} Ban doc
+            {{formGroup.getRawValue().id ? 'Update':'Add'}} Danh Mục
         </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="row form-group">
         <div class="col-12">
             <form class="row" [formGroup]="formGroup" (ngSubmit)="doSubmit()">
+                <!--                <div class="col-6">-->
+                <!--                    <mat-form-field class="w-100" appearance="outline">-->
+                <!--                        <mat-label>Loại danh mục</mat-label>-->
+                <!--                        <mat-select formControlName="maDM">-->
+                <!--                            <mat-option *ngFor="let item of itemNXB" [value]="item.id">-->
+                <!--                                {{item.id}} - {{item.ten}}-->
+                <!--                            </mat-option>-->
+                <!--                        </mat-select>-->
+                <!--                        <app-inline-message [formName]="formGroup.get('nhaxuatban.id')" [message]="'Name'">-->
+                <!--                        </app-inline-message>-->
+                <!--                    </mat-form-field>-->
+                <!--                </div>-->
                 <div class="col-6">
                     <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Name</mat-label>
-                        <input matInput formControlName="ten" type="text" class="w-100">
-                        <app-inline-message [formName]="formGroup.get('ten')" [message]="'Name'">
-                        </app-inline-message>
-                    </mat-form-field>
-                </div>
-                <div class="col-6">
-                    <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Ma</mat-label>
+                        <mat-label>Mã Danh Mục </mat-label>
                         <input matInput formControlName="ma" type="text" class="w-100">
                         <app-inline-message [formName]="formGroup.get('ma')" [message]="'Name'">
                         </app-inline-message>
                     </mat-form-field>
                 </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Tên Tiếng Việt</mat-label>
+                        <input matInput formControlName="tenTv" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('tenTv')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Tên Tiếng Anh </mat-label>
+                        <input matInput formControlName="tenEn" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('tenEn')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
+
+
 
                 <div class="col-6">
                     <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Phone number</mat-label>
-                        <input matInput formControlName="sdt" type="text" class="w-100">
-                        <app-inline-message [formName]="formGroup.get('sdt')" [message]="'Phone number'">
+                        <mat-label>Thứ tự</mat-label>
+                        <input matInput formControlName="thuTu" type="number" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('thuTu')" [message]="'Name'">
                         </app-inline-message>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Address</mat-label>
-                        <textarea matInput formControlName="diaChi" rows="3"></textarea>
-                        <app-inline-message [formName]="formGroup.get('diaChi')" [message]="'Address'">
+                        <mat-label>Nhóm</mat-label>
+                        <input matInput formControlName="nhom" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('nhom')" [message]="'Name'">
                         </app-inline-message>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>Date</mat-label>
-                        <input matInput type="date" formControlName="ngaySinh" rows="3" />
-                        <app-inline-message [formName]="formGroup.get('ngaySinh')" [message]="'Name'">
+                        <mat-label>Ngày Hiệu Lực</mat-label>
+                        <input matInput type="date" formControlName="ngayHl" rows="3"/>
+                        <app-inline-message [formName]="formGroup.get('ngayHl')" [message]="'Name'">
                         </app-inline-message>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field class="w-100" appearance="outline">
-                        <mat-label>CreateUser</mat-label>
-                        <input matInput type="date" formControlName="taoTk" rows="3" />
-                        <app-inline-message [formName]="formGroup.get('taoTk')" [message]="'Name'">
+                        <mat-label>Ngày Hết Hiệu Lực</mat-label>
+                        <input matInput type="date" formControlName="ngayHhl" rows="3"/>
+                        <app-inline-message [formName]="formGroup.get('ngayHhl')" [message]="'Name'">
                         </app-inline-message>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
-                    <label for="">Chọn hạng</label>
-                    <select class="form-control mt-2" formControlName="hang" [value]="1">
-                        <option value="1">Cao thu</option>
-                        <option value="2">Kim cuong</option>
-                        <option value="3">Bach kim</option>
-                        <option value="4">Vang</option>
-                        <option value="5">Bac</option>
-                        <option value="6">Dong</option>
+                    <mat-form-field class="w-100" appearance="outline">
+                        <mat-label>Trạng Thái</mat-label>
+                        <input matInput formControlName="trangThai" type="text" class="w-100">
+                        <app-inline-message [formName]="formGroup.get('trangThai')" [message]="'Name'">
+                        </app-inline-message>
+                    </mat-form-field>
+                </div>
 
-                    </select>
-                </div>
                 <div class="text-center">
                     <button class="btn btn-primary">Submit</button>
                 </div>
@@ -84,14 +100,14 @@
 <mat-expansion-panel [expanded]="true">
     <mat-expansion-panel-header>
         <mat-panel-title>
-            {{'List of bandoc'}}
+            {{'List of Danh Mục'}}
         </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="table-responsive">
         <ngx-datatable [ngClass]="'material'" [columnMode]="'flex'" [columns]="columns" rowHeight="auto"
-            [count]="items.length" [offset]="page.pageNumber" [limit]="page.size" [headerHeight]="50"
-            [footerHeight]="50" [rows]="items" [externalPaging]="false"
-            [messages]="{emptyMessage: 'Không có dữ liệu', totalMessage: 'bản ghi'}">
+                       [count]="items.length" [offset]="page.pageNumber" [limit]="page.size" [headerHeight]="50"
+                       [footerHeight]="50" [rows]="items" [externalPaging]="false"
+                       [messages]="{emptyMessage: 'Không có dữ liệu', totalMessage: 'bản ghi'}">
             <ng-container *ngFor="let col of columns">
                 <ngx-datatable-column prop="{{ col.prop }}" name="{{ col.name }}" [flexGrow]="col.flexGrow">
                     <ng-template let-column="column" ngx-datatable-header-template>
@@ -103,27 +119,26 @@
                                 {{ rowIndex + 1 + page.pageNumber * page.size }}
                             </ng-container>
 
-                            <ng-container *ngSwitchCase="'ngaySinh'">
-                                {{ value | date: 'dd/MM/yyyy HH:mm:ss' }}
-                            </ng-container>
-                                 <!-- <ng-container>
-                                {{bandoc.hang == 1?'Kim cương': bandoc.hang == 2
-                                ?'Vàng':bandoc.hang==3?'Bạc':bandoc.hang==4?'Đồng':bandoc.hang==5?'Sắt':'Non'}}
-                            </ng-container> -->
-                            <ng-container *ngSwitchCase="'hang'">
-                                {{ value == 1 ? 'Cao thu' : 'Kim cuong' ? 'Bạch kim' : 'Vàng' ? 'Bạc' : 'Đồng' ? 'Unrank' : '' }}
-                            </ng-container>
-
                             <ng-container *ngSwitchCase="'actions'" class="text-center">
                                 <button class="btn btn-sm btn-outline-primary mg-r-2" type="button" title="Sửa"
-                                    (click)="edit(row)">
+                                        (click)="edit(row)">
                                     <span class="fe fe-edit-2">Sua</span>
                                 </button>
                                 <button class="btn btn-sm btn-outline-danger mg-l-2" type="button" title="Xóa"
-                                    (click)="delete(row.id)">
+                                        (click)="delete(row.id)">
                                     <span class="fe fe-trash-2">Xoa</span>
                                 </button>
                             </ng-container>
+                            <!--                            <ng-container *ngFor="let item of itemsTG">-->
+                            <!--                                <ng-container *ngSwitchCase="'idTg'">-->
+                            <!--                                    {{ item.id == value ? item.ten : '' }}-->
+                            <!--                                </ng-container>-->
+                            <!--                            </ng-container>-->
+                            <!--                            <ng-container *ngFor="let item of itemNXB">-->
+                            <!--                                <ng-container *ngSwitchCase="'idNxb'">-->
+                            <!--                                    {{ item.id == value ? item.ten : '' }}-->
+                            <!--                                </ng-container>-->
+                            <!--                            </ng-container>-->
 
                             <ng-container *ngSwitchDefault>
                                 <span title="{{ value }}">{{ value }}</span>

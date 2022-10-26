@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class InlineMessageComponent implements OnInit {
     @Input() formName!: any;
     @Input() message!: string;
+    @Input() number!: number;
 
     constructor() {
     }
@@ -23,6 +24,8 @@ export class InlineMessageComponent implements OnInit {
                 return `${this.message} không được vượt quá ${this.formName?.errors?.['maxlength'].requiredLength} ký tự`;
             } else if (this.formName.hasError('max')) {
                 return `${this.message} không được lớn hơn ${this.formName?.errors?.['max'].max}`;
+            }else if (this.formName.hasError('pattren')){
+                return `${this.message} không đúng định dạng ${this.formName?.errors?.['pattren'].requiredPattern}`;
             }
         }
         return '';

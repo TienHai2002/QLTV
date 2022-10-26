@@ -1,7 +1,7 @@
-import {Injectable, OnDestroy} from '@angular/core';
-import {BehaviorSubject, fromEvent, Subject} from 'rxjs';
-import {debounceTime, takeUntil} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import { Injectable, OnDestroy } from '@angular/core';
+import { BehaviorSubject, fromEvent, Subject } from 'rxjs';
+import { debounceTime, takeUntil } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 // Menu
 export interface Menu {
@@ -125,41 +125,55 @@ export class NavService implements OnDestroy {
         //     active: true,
         //     path: '/pages/les-five',
         // },
+        // {
+        //     title: 'Ban doc',
+        //     icon: 'grid',
+        //     type: 'link',
+        //     active: true,
+        //     path: '/pages/bandoc',
+        // },
+        // {
+        //     title: 'Mượn sách',
+        //     icon: 'grid',
+        //     type: 'link',
+        //     active: true,
+        //     path: '/pages/muonsach',
+        // },
+        // {
+        //     title: 'Nha xuat ban',
+        //     icon: 'grid',
+        //     type: 'link',
+        //     active: true,
+        //     path: '/pages/nhaxuatban',
+        // },
+        // {
+        //     title: 'sach',
+        //     icon: 'grid',
+        //     type: 'link',
+        //     active: true,
+        //     path: '/pages/sach',
+        // },
+        // {
+        //     title: 'Tac gia',
+        //     icon: 'grid',
+        //     type: 'link',
+        //     active: true,
+        //     path: '/pages/tacgia',
+        // },
         {
-            title: 'Ban doc',
+            title: 'Quản lý loai danh muc',
             icon: 'grid',
             type: 'link',
             active: true,
-            path: '/pages/bandoc',
+            path: '/pages/loaidanhmuc',
         },
         {
-            title: 'Mượn sách',
+            title: 'Quản lý loai danh muc1',
             icon: 'grid',
             type: 'link',
             active: true,
-            path: '/pages/muonsach',
-        },
-        {
-            title: 'Nha xuat ban',
-            icon: 'grid',
-            type: 'link',
-            active: true,
-            path: '/pages/nhaxuatban',
-        },
-        {
-            title: 'sach',
-            icon: 'grid',
-            type: 'link',
-            active: true,
-            path: '/pages/sach',
-        },
-        {
-            title: 'Tac gia',
-            icon: 'grid',
-            type: 'link',
-            active: true,
-            path: '/pages/tacgia',
-        },
+            path: '/pages/danhmuc',
+        }
         // {
         //     title: 'Quản lý mapping danh mục',
         //     icon: 'share-2',

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { Page } from 'src/app/shared/model/page';
-import { MuonSachService } from 'src/app/shared/services/muonsach.service';
-import { BandocService } from 'src/app/shared/services/bandoc.service';
-import { SachService } from 'src/app/shared/services/sach.service';
+import {Component, OnInit} from '@angular/core';
+import {Validators, FormBuilder} from '@angular/forms';
+import {ToastrService} from 'ngx-toastr';
+import {Page} from 'src/app/shared/model/page';
+import {MuonSachService} from 'src/app/shared/services/muonsach.service';
+import {BandocService} from 'src/app/shared/services/bandoc.service';
+import {SachService} from 'src/app/shared/services/sach.service';
 
 @Component({
     selector: 'app-muonsach',
@@ -13,26 +13,26 @@ import { SachService } from 'src/app/shared/services/sach.service';
 })
 export class MuonsachComponent implements OnInit {
     items = [];
-    itemsBD:any;
-    itemsS:any;
+    itemsBD: any;
+    itemsS: any;
     page = new Page();
 
     columns = [
-        { name: 'STT', prop: 'index', flexGrow: 1.5 },
-        { name: 'ID Ban Doc', prop: 'idBanDoc', flexGrow: 3 },
-        { name: 'ID Sach', prop: 'idSach', flexGrow: 3 },
-        { name: 'So Luong', prop: 'soLuong', flexGrow: 3 },
-        { name: 'Ngay Muon', prop: 'ngayMuon', flexGrow: 3 },
-        { name: 'Ngay Tra', prop: 'ngayTra', flexGrow: 3 },
-        { name: 'Trang Thai', prop: 'trangThai', flexGrow: 3 },
-        { name: 'Ghi chu', prop: 'ghiChu', flexGrow: 3 },
-        { name: 'Actions', prop: 'actions', flexGrow: 4 },
+        {name: 'STT', prop: 'index', flexGrow: 1.5},
+        {name: 'ID Ban Doc', prop: 'idBanDoc', flexGrow: 3},
+        {name: 'ID Sach', prop: 'idSach', flexGrow: 3},
+        {name: 'So Luong', prop: 'soLuong', flexGrow: 3},
+        {name: 'Ngay Muon', prop: 'ngayMuon', flexGrow: 3},
+        {name: 'Ngay Tra', prop: 'ngayTra', flexGrow: 3},
+        {name: 'Trang Thai', prop: 'trangThai', flexGrow: 3},
+        {name: 'Ghi chu', prop: 'ghiChu', flexGrow: 3},
+        {name: 'Actions', prop: 'actions', flexGrow: 4},
     ];
 
     formGroup = this.fb.group({
         id: [''],
-        idBanDoc: [{id:null}, Validators.required],
-        idSach: [{id:null}, Validators.required],
+        idBanDoc: ['', Validators.required],
+        idSach: ['', Validators.required],
         soLuong: [''],
         ngayMuon: [''],
         ngayTra: [''],
@@ -40,13 +40,15 @@ export class MuonsachComponent implements OnInit {
         ghiChu: [''],
     });
 
+    
     constructor(
         private fb: FormBuilder,
         private MuonSachService: MuonSachService,
         private toastrService: ToastrService,
         private BandocService: BandocService,
         private SachService: SachService
-    ) {}
+    ) {
+    }
 
     ngOnInit(): void {
         this.prepareData();
@@ -54,15 +56,18 @@ export class MuonsachComponent implements OnInit {
         this.getSach();
 
     }
-getSach(){
-    this.SachService.getSach().subscribe((next: any) => {
-        console.log('next', next);
-        this.itemsS = next;
-    });
-}
+
+    getSach() {
+        this.SachService.getSach().subscribe((next: any) => {
+            console.log('next', next);
+            this.itemsS = next;
+        });
+    }
+
     prepareData() {
         this.getMuonSach();
     }
+
     doSubmit() {
         this.formGroup.markAllAsTouched();
         if (this.formGroup.invalid) {
@@ -105,18 +110,9 @@ getSach(){
             this.items = next;
         });
     }
-    edit(row: any) {
-        this.formGroup.patchValue({
-            id: row.id,
-            idBanDoc: row.idBanDoc,
-            idSach: row.idSach,
-            soLuong: row.soLuong,
-            ngayMuon: row.ngayMuon,
-            ngayTra: row.ngayTra,
-            trangThai: row.trangThai,
-            ghiChu: row.ghiChu,
 
-        });
+    edit(row: any) {
+        this.formGroup.patchValue(row);
     }
 
     delete(id: any) {
@@ -132,9 +128,11 @@ getSach(){
             },
         });
     }
+
     resetForm() {
         this.formGroup.reset();
     }
+
     getBandoc() {
         this.BandocService.getBandoc().subscribe((next: any) => {
             console.log('next', next);

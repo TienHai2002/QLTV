@@ -4,7 +4,7 @@ import * as moment from 'moment';
 
 import {
   DateRangePickerComponent,
-  IDateRange,
+  // IDateRange,
   IDateRangePickerOptions,
 } from 'ngx-daterange';
 import { map, Observable } from 'rxjs';

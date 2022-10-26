@@ -22,7 +22,9 @@ const routes: Routes = [
         loadChildren: () =>
             import('./auth/auth.module').then((m) => m.AuthModule),
     },
-   
+
+
+
     {
         path: '**',
         component: Error404Component,

@@ -1,6 +1,6 @@
 export class Page {
     // The number of elements in the page
-    size: number = 10;
+    size: number = 5;
     // The total number of elements
     totalElements: number = 0;
     // The total number of pages
